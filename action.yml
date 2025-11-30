@@ -1,6 +1,6 @@
-name: Homebrew bump cask
-description: Bump (update) a Homebrew cask on new project release
-author: macauley
+name: Homebrew Bump Cask
+description: Bump (update) a Homebrew Cask on New Project Release
+author: LanikSJ
 branding:
   icon: arrow-up-circle
   color: yellow
