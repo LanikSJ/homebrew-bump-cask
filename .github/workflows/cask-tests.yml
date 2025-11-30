@@ -1,0 +1,36 @@
+name: Cask Test Action
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths: [ 'action.yml', 'main.rb' ]
+  pull_request:
+    branches: [ main ]
+    paths: [ 'action.yml', 'main.rb' ]
+
+jobs:
+  test-livecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      - name: Test livecheck with dry-run
+        uses: ./ # Use this action from the current repo
+        with:
+          token: ${{ secrets.HOMEBREW_TOKEN }}
+          tap: laniksj/homebrew-tap
+          cask: android-messages-plus
+          livecheck: true
+          dryrun: true
+  test-bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      - name: Test bump with dry-run
+        uses: ./ # Use this action from the current repo
+        with:
+          token: ${{ secrets.HOMEBREW_TOKEN }}
+          tap: laniksj/homebrew-tap
+          cask: android-messages-plus
+          livecheck: true
+          dryrun: true

@@ -25,18 +25,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
       - name: Setup Restyled
-        uses: restyled-io/actions/setup@v4.4.2
+        uses: restyled-io/actions/setup@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
       - name: Run Restyled
         id: restyler
-        uses: restyled-io/actions/run@v4.4.2
+        uses: restyled-io/actions/run@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
         with:
           fail-on-differences: true
 
       - name: Create Restyled PR
         if: ${{ !cancelled() && steps.restyler.outputs.success == 'true' }}
-        uses: peter-evans/create-pull-request@v7.0.9
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
         with:
           base: ${{ steps.restyler.outputs.restyled-base }}
           branch: ${{ steps.restyler.outputs.restyled-head }}
@@ -47,20 +47,20 @@ jobs:
           delete-branch: true
 
   restyle-fork:
-    name: Restyle PR for forks
+    name: Restyle PR for Forks
     if: |
       github.event.action != 'closed' &&
       github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       - name: Setup Restyled
-        uses: restyled-io/actions/setup@v4.4.2
+        uses: restyled-io/actions/setup@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
       - name: Run Restyled
-        uses: restyled-io/actions/run@v4.4.2
+        uses: restyled-io/actions/run@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
         with:
           fail-on-differences: true
 
@@ -70,10 +70,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Restyled
-        uses: restyled-io/actions/setup@v4.4.2
+        uses: restyled-io/actions/setup@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
       - name: Run Restyled
         id: restyler
-        uses: restyled-io/actions/run@v4.4.2
+        uses: restyled-io/actions/run@e3cf32c6ab87c25a80755403de9bf92fa34ab4bb # v4.4.2
       - name: Close Restyled PR
         run: gh --repo "$REPO" pr close "$BRANCH" --delete-branch || true
         env:
