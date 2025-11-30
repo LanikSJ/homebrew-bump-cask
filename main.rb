@@ -94,7 +94,7 @@ module Homebrew
 
     # Get info about cask
     stable = Cask::CaskLoader.load(cask)
-    is_git = stable.downloader.is_a? GitDownloadStrategy
+    is_git = false
 
     # Prepare tag and url
     tag = tag.delete_prefix "refs/tags/"
