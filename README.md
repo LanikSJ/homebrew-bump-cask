@@ -151,7 +151,7 @@ repository settings or as a secret.
 
 ## 📚 Examples
 
-- <https://github.com/macauley/homebrew-bump-casks/blob/main/.github/workflows/bump-ham-casks.yml>
+- <https://github.com/LanikSJ/homebrew-bump-casks/blob/main/.github/workflows/bump-ham-casks.yml>
 
 ## 🤝 Contributing
 
