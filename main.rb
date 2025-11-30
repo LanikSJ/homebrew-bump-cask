@@ -93,7 +93,7 @@ module Homebrew
     cask = tap + "/" + cask if !tap.blank? && !cask.blank?
 
     # Get info about cask
-    stable = Cask::CaskLoader.load(cask).stable
+    stable = Cask::CaskLoader.load(cask)
     is_git = stable.downloader.is_a? GitDownloadStrategy
 
     # Prepare tag and url
