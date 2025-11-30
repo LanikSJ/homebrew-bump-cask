@@ -81,7 +81,7 @@ runs:
       shell: sh
     - run: brew install-bundler-gems --groups=ast
       shell: sh
-    - run: brew ruby $GITHUB_ACTION_PATH/main.rb
+    - run: brew ruby $GITHUB_ACTION_PATH/main.rb --force
       shell: sh
       env:
         HOMEBREW_GITHUB_API_TOKEN: ${{inputs.token}}
