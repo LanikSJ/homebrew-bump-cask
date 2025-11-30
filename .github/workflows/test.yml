@@ -18,7 +18,8 @@ jobs:
         uses: ./ # Use this action from the current repo
         with:
           token: ${{ secrets.HOMEBREW_TOKEN }}
-          cask: wget
+          tap: homebrew/homebrew-cask
+          cask: slack
           livecheck: true
           dryrun: true
   test-bump:
@@ -29,7 +30,6 @@ jobs:
         uses: ./ # Use this action from the current repo
         with:
           token: ${{ secrets.HOMEBREW_TOKEN }}
-          tap: homebrew/core
-          cask: wget
-          tag: v1.21.4 # Use a known version/tag for testing
+          tap: homebrew/homebrew-cask
+          cask: slack
           dryrun: true
