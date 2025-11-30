@@ -18,7 +18,6 @@ jobs:
         uses: ./ # Use this action from the current repo
         with:
           token: ${{ secrets.HOMEBREW_TOKEN }}
-          tap: homebrew/core
           cask: wget
           livecheck: true
           dryrun: true
