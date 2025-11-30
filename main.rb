@@ -99,10 +99,10 @@ module Homebrew
     # Prepare tag and url
     tag = tag.delete_prefix "refs/tags/"
     version = Version.parse tag
-    url = stable.url.gsub stable.version, version
+    url = stable.url.to_s.gsub stable.version.to_s, version.to_s
 
     # Check if cask is originating from PyPi
-    pypi_url = PyPI.update_pypi_url(stable.url, version)
+    pypi_url = PyPI.update_pypi_url(stable.url.to_s, version)
     if pypi_url
       # Substitute url
       url = pypi_url
