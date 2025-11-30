@@ -18,8 +18,9 @@ jobs:
         uses: ./ # Use this action from the current repo
         with:
           token: ${{ secrets.HOMEBREW_TOKEN }}
-          cask: slack
-          tag: v1.0.0
+          tap: laniksj/homebrew-tap
+          cask: android-messages-plus
+          livecheck: true
           dryrun: true
   test-bump:
     runs-on: ubuntu-latest
@@ -29,6 +30,7 @@ jobs:
         uses: ./ # Use this action from the current repo
         with:
           token: ${{ secrets.HOMEBREW_TOKEN }}
-          cask: slack
-          tag: v1.0.0
+          tap: laniksj/homebrew-tap
+          cask: android-messages-plus
+          livecheck: true
           dryrun: true
