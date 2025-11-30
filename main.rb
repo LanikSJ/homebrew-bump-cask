@@ -76,7 +76,7 @@ module Homebrew
   git "config", "--global", "user.email", user_email
 
   # Tap the tap if desired (skip built-in taps)
-  brew "tap", tap unless tap.blank? || tap == "homebrew/core" || tap == "homebrew/cask"
+  brew "tap", tap unless tap.blank? || tap == "homebrew/core" || tap == "homebrew/cask" || tap == "homebrew/homebrew-cask"
 
   # Append additional PR message
   message = if message.blank?

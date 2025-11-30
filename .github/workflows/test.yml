@@ -18,9 +18,7 @@ jobs:
         uses: ./ # Use this action from the current repo
         with:
           token: ${{ secrets.HOMEBREW_TOKEN }}
-          tap: homebrew/homebrew-cask
           cask: slack
-          livecheck: true
           dryrun: true
   test-bump:
     runs-on: ubuntu-latest
@@ -30,6 +28,5 @@ jobs:
         uses: ./ # Use this action from the current repo
         with:
           token: ${{ secrets.HOMEBREW_TOKEN }}
-          tap: homebrew/homebrew-cask
           cask: slack
           dryrun: true
