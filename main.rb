@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "cask"
+require "cask/cask_loader"
 require "utils/pypi"
 
 class Object
@@ -92,7 +93,7 @@ module Homebrew
     cask = tap + "/" + cask if !tap.blank? && !cask.blank?
 
     # Get info about cask
-    stable = Cask[cask].stable
+    stable = Cask::CaskLoader.load(cask).stable
     is_git = stable.downloader.is_a? GitDownloadStrategy
 
     # Prepare tag and url
