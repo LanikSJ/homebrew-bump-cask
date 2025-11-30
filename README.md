@@ -1,4 +1,4 @@
-# Homebrew Bump Cask GitHub Action
+# 🍻 Homebrew Bump Cask GitHub Action
 
 A GitHub Action that automates updating Homebrew casks by wrapping the
 `brew bump-cask-pr` command. It simplifies keeping casks up-to-date with new
