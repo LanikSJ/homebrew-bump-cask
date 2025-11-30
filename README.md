@@ -1,18 +1,44 @@
-# Homebrew bump formula GitHub Action
+# Homebrew Bump Cask GitHub Action
 
-An action that wraps `brew bump-formula-pr` to ease the process of updating the formula on new project releases.
+A GitHub Action that automates updating Homebrew casks by wrapping the
+`brew bump-cask-pr` command. It simplifies keeping casks up-to-date with new
+project releases and supports both manual updates and scheduled automated
+checking for outdated casks.
 
 Works on Ubuntu and macOS runners.
 
-## Usage
+## 📑 Table of Contents
 
-One should use the [Personal Access Token](https://github.com/settings/tokens/new?scopes=public_repo,workflow) for `token` input to this Action, not the default `GITHUB_TOKEN`, because `brew bump-formula-pr` creates a fork of the formula's tap repository (if needed) and then creates a pull request.
+- [🐙 Security Note](#-security-note)
+- [💡 Usage](#-usage)
+  - [⚙️ Standard mode](#standard-mode)
+  - [🔍 Livecheck mode](#-livecheck-mode)
+- [🔧 Troubleshooting](#-troubleshooting)
+- [📚 Examples](#-examples)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+
+## 🔒 Security Note
+
+This action creates pull requests to Homebrew taps, which requires forking
+repositories and writing code changes. The provided GitHub token must have
+appropriate permissions to create forks and pull requests. Never use the default
+`GITHUB_TOKEN` unless you have `public_repo` permissions enabled on
+your repository.
+
+## 💡 Usage
+
+One should use the [Personal Access
+Token](https://github.com/settings/tokens/new?scopes=public_repo,workflow)
+for `token` input to this Action, not the default `GITHUB_TOKEN`, because
+`brew bump-cask-pr` creates a fork of the cask's tap repository (if needed) and
+then creates a pull request.
 
 > There are two ways to use this Action.
 
-### Standard mode
+### Standard Mode
 
-Use if you want to simply bump the formula, when a new release happens.
+Use if you want to simply bump the cask, when a new release happens.
 
 Listen for new tags in workflow:
 
@@ -27,77 +53,116 @@ on:
   #     - "*"
 ```
 
-The Action will extract all needed informations by itself, you just need to specify the following step in your workflow:
+The Action will automatically extract all needed information; you just need to
+specify the following step in your workflow:
 
 ```yaml
-- name: Update Homebrew formula
-  uses: dawidd6/action-homebrew-bump-formula@v6
+- name: Update Homebrew cask
+  uses: LanikSJ/homebrew-bump-cask@v1
   with:
-    # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
+    # **Required:** GitHub access token with 'public_repo' and 'workflow' scopes
     token: ${{secrets.TOKEN}}
-    # Optional, will commit with this user name
+    # *Optional:* Custom commit user name (defaults to the token owner)
     user_name: name
-    # Optional, will commit with this user email
+    # *Optional:* Custom commit user email (defaults to the token owner)
     user_email: email@example.com
-    # Optional, will create tap repo fork in organization
+    # *Optional:* Organization to create tap repo fork in
     org: ORG
-    # Optional, use the origin repository instead of forking
+    # *Optional:* Use the origin repository instead of forking
+    # (for maintainers with write access)
     no_fork: false
-    # Optional, defaults to homebrew/core
+    # *Optional:* Tap to check for outdated casks (use instead of cask list)
     tap: USER/REPO
-    # Formula name, required
-    formula: FORMULA
-    # Optional, will be determined automatically
+    # **Required:** Name of the cask to bump
+    cask: cask
+    # *Optional:* Specific tag/version to bump to
+    # (auto-detected from release/tag if not set)
     tag: ${{github.ref}}
-    # Optional, will be determined automatically
+    # *Optional:* Git SHA of the version to bump to
+    # (auto-detected from release if not set)
     revision: ${{github.sha}}
-    # Optional, if don't want to check for already open PRs
-    force: false # true
+    # *Optional:* Force bump even if PR already exists
+    # (set to true to skip duplicate checks)
+    force: false
 ```
 
-### Livecheck mode
+### 🔍 Livecheck Mode
 
-If `livecheck` input is set to `true`, the Action will run `brew livecheck` to check if any provided formulae are outdated or if tap contains any outdated formulae and then will run `brew bump-formula-pr` on each of those formulae with proper arguments to bump them.
+If `livecheck` input is set to `true`, the Action will run `brew livecheck` to
+check if any provided casks are outdated or if tap contains any outdated casks
+and then will run `brew bump-cask-pr` on each of those casks with proper
+arguments to bump them.
 
-Might be a good idea to run this on schedule in your tap repo, so one gets automated PRs updating outdated formulae.
+Might be a good idea to run this on schedule in your tap repo, so one gets
+automated PRs updating outdated casks.
 
-If there are no outdated formulae, the Action will just exit.
+If there are no outdated casks, the Action will just exit.
 
 ```yaml
-- name: Update Homebrew formula
-  uses: dawidd6/action-homebrew-bump-formula@v6
+- name: Update Homebrew cask
+  uses: LanikSJ/homebrew-bump-cask@v1
   with:
-    # Required, custom personal GitHub access token with only the 'public_repo' scope enabled
+    # **Required:** GitHub personal access token with 'public_repo' scope
     token: ${{secrets.CUSTOM_PERSONAL_ACCESS_TOKEN}}
-    # Optional, will commit with this user name
+    # *Optional:* Custom commit user name (defaults to the token owner)
     user_name: user_name
-    # Optional, will commit with this user email
+    # *Optional:* Custom commit user email (defaults to the token owner)
     user_email: email@example.com
-    # Optional, will create tap repo fork in organization
+    # *Optional:* Organization to create tap repo fork in
     org: ORG
-    # Bump all outdated formulae in this tap
+    # *Optional:* Homebrew tap to check for outdated casks
+    # (use instead of cask list)
     tap: USER/REPO
-    # Bump only these formulae if outdated
-    formula: FORMULA-1, FORMULA-2, FORMULA-3, ...
-    # Optional, if don't want to check for already open PRs
-    force: false # true
-    # Need to set this input if want to use `brew livecheck`
+    # *Optional:* Specific casks to check (comma-separated if multiple)
+    cask: cask-1, cask-2, cask-3, ...
+    # *Optional:* Force bump even if PR already exists
+    # (set to true to skip duplicate checks)
+    force: false
+    # **Required for livecheck mode:** Enables livecheck functionality
     livecheck: true
 ```
 
-If only `tap` input is provided, all formulae in given tap will be checked and bumped if needed.
+If only the `tap` input is provided, all casks in the given tap will be
+checked and bumped if needed.
 
-## Examples
+## 🔧 Troubleshooting
 
-- https://github.com/dawidd6/action-homebrew-bump-formula/blob/master/.github/workflows/test.yml
-- https://github.com/dawidd6/ba-bump/blob/master/.github/workflows/bump.yml
-- https://github.com/ablinov/declutter/blob/master/.github/workflows/bump_homebrew_formula.yml
-- https://github.com/jesseduffield/lazygit/blob/master/.github/workflows/cd.yml
-- https://github.com/stephan-hesselmann-by/homebrew-BlueYonder/blob/master/.github/workflows/update-tap.yml
-- https://github.com/crunchtime-ali/brew-formula-updater/blob/master/.github/workflows/main.yml
-- https://github.com/asciidoc/asciidoc-py3/blob/master/.github/workflows/release.yml
-- https://github.com/bow-swift/nef/blob/master/.github/workflows/bump-formula.yml
-- https://github.com/dandavison/delta/blob/master/.github/workflows/cd.yml
-- https://github.com/GitTools/GitVersion/blob/main/.github/workflows/homebrew.yml
-- https://github.com/wormi4ok/evernote2md/blob/master/.github/workflows/publish.yml
-- https://github.com/cloudskiff/driftctl/blob/main/.github/workflows/homebrew.yml
+### Common Issues
+
+- **Action fails with authentication error**: Ensure your GitHub token has the
+  required scopes (`public_repo` and `workflow` for standard mode). Verify the
+  token is stored as a repository secret and referenced correctly.
+
+- **Pull request not created**: Check that the token has permissions to create
+  forks and pull requests for the target repository. For private taps, ensure
+  the token owner has the necessary access.
+
+- **No outdated casks found in livecheck mode**: Verify that the correct tap is
+  specified and that the casks actually have newer versions available that
+  `brew livecheck` can detect.
+
+- **Permission denied**: If using `no_fork: true`, ensure the token has write
+  access to the target repository.
+
+### Debugging
+
+Enable debug logging by setting `ACTIONS_STEP_DEBUG` to `true` in your
+repository settings or as a secret.
+
+## 📚 Examples
+
+- <https://github.com/macauley/homebrew-bump-casks/blob/main/.github/workflows/bump-ham-casks.yml>
+
+## 🤝 Contributing
+
+This project welcomes contributions! Please see the repository guidelines for:
+
+- Reporting bugs or requesting features via
+  [GitHub Issues](https://github.com/LanikSJ/action-homebrew-bump-cask/issues)
+- Submitting pull requests with improvements or fixes
+- Best practices for development and testing
+
+## 📄 License
+
+This project is licensed under the MIT License - see the
+[LICENSE](LICENSE) file for details.
