@@ -7,6 +7,10 @@ checking for outdated casks.
 
 Works on Ubuntu and macOS runners.
 
+[![GitHub Actions Workflow](https://img.shields.io/github/actions/workflow/status/LanikSJ/homebrew-bump-cask/cask-tests.yml)](https://github.com/LanikSJ/homebrew-bump-cask/actions/workflows/cask-tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Release](https://img.shields.io/github/v/release/LanikSJ/homebrew-bump-cask)](https://github.com/LanikSJ/homebrew-bump-cask/releases)
+
 ## 📑 Table of Contents
 
 - [🐙 Security Note](#-security-note)
