@@ -14,6 +14,8 @@ Works on Ubuntu and macOS runners.
   - [⚙️ Standard mode](#standard-mode)
   - [🔍 Livecheck mode](#-livecheck-mode)
 - [🔧 Troubleshooting](#-troubleshooting)
+  - [❓ Common Issues](#-common-issues)
+  - [🔍 Debugging](#-debugging)
 - [📚 Examples](#-examples)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
@@ -127,7 +129,7 @@ checked and bumped if needed.
 
 ## 🔧 Troubleshooting
 
-### Common Issues
+### ❓ Common Issues
 
 - **Action fails with authentication error**: Ensure your GitHub token has the
   required scopes (`public_repo` and `workflow` for standard mode). Verify the
@@ -144,7 +146,7 @@ checked and bumped if needed.
 - **Permission denied**: If using `no_fork: true`, ensure the token has write
   access to the target repository.
 
-### Debugging
+### 🔍 Debugging
 
 Enable debug logging by setting `ACTIONS_STEP_DEBUG` to `true` in your
 repository settings or as a secret.
