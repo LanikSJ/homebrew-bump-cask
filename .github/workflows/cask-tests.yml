@@ -13,7 +13,7 @@ jobs:
   test-livecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Test livecheck with dry-run
         uses: ./ # Use this action from the current repo
         with:
@@ -25,7 +25,7 @@ jobs:
   test-bump:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Test bump with dry-run
         uses: ./ # Use this action from the current repo
         with:
