@@ -1,0 +1,62 @@
+# Cline Rules for homebrew-bump-cask Repository
+
+## Repository Overview
+
+homebrew-bump-cask is a GitHub Action for automatically updating Homebrew casks.
+
+## Code Standards and Practices
+
+### Action Standards
+
+- Follow GitHub Actions best practices
+- Implement proper input validation and error handling
+- Include comprehensive logging and debugging options
+- Provide clear error messages for common failure scenarios
+
+### Ruby Code Standards
+
+- Write clear, maintainable Ruby code
+- Include proper error handling and validation
+- Add tests for new functionality
+- Follow Ruby style guidelines
+
+### Documentation Standards
+
+- Include clear usage examples and workflow templates
+- Document all inputs, outputs, and required permissions
+- Provide troubleshooting guidance for common issues
+- Use markdown formatting consistently
+
+### Markdown Compliance Requirements
+
+- **ALL markdown files (.md) MUST pass markdownlint validation with zero errors or warnings**
+- Run `markdownlint <filename>` on every markdown file before considering it complete
+- Follow the project's `.markdownlint.json` configuration strictly
+- Address ALL markdownlint issues immediately - no exceptions or workarounds
+- Common requirements include:
+  - Maximum line length of 80 characters (MD013)
+  - Consistent heading styles and hierarchy
+  - Proper list formatting and indentation
+  - Blank lines around headings and code blocks
+  - Consistent link and reference formatting
+  - No trailing whitespace
+  - Files must end with newlines
+  - Proper table formatting when applicable
+- Use `markdownlint --fix <filename>` for auto-fixable issues when available
+- Validate markdown files in CI/CD pipelines where applicable
+
+## Development Guidelines
+
+### When Making Changes
+
+- Preserve existing functionality unless explicitly asked to change it
+- Update documentation when modifying action behavior or adding features
+- Test changes across different Homebrew cask scenarios
+- **Always run markdownlint and fix all issues in markdown files before considering changes complete**
+
+### Homebrew Integration Standards
+
+- Handle various cask formats and update patterns
+- Implement proper version checking and comparison logic
+- Provide clear feedback for cask update operations
+- Test against real Homebrew casks and repositories
