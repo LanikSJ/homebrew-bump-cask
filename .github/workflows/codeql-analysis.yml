@@ -1,31 +1,39 @@
+# CodeQL Analysis Workflow
+# This workflow performs CodeQL security analysis on the repository
 name: "CodeQL Analysis"
 
 on:
- push:
-   branches:
-     - main
- pull_request:
-   branches:
-     - main
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
- analyze:
-   name: Analyze
-   runs-on: ubuntu-latest
-   permissions:
-     actions: read
-     contents: read
-     security-events: write
+  codeql-analysis:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
 
-   steps:
-   - name: Checkout Repository
-     uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+    steps:
+      # Checkout the repository to analyze
+      - name: Checkout Repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
-   - name: Initialize CodeQL
-     uses: github/codeql-action/init@cf1bb45a277cb3c205638b2cd5c984db1c46a412 # v4.31.7
-     with:
-       languages: ruby
-       # config-file: ./.github/codeql/codeql-config.yml
+      # Initialize CodeQL with Ruby language analysis
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@cf1bb45a277cb3c205638b2cd5c984db1c46a412 # v4.31.7
+        with:
+          languages: ruby
+          # config-file: ./.github/codeql/codeql-config.yml  # Uncomment if config file exists
 
-   - name: Perform CodeQL Analysis
-     uses: github/codeql-action/analyze@cf1bb45a277cb3c205638b2cd5c984db1c46a412 # v4.31.7
+      # Perform CodeQL analysis
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@cf1bb45a277cb3c205638b2cd5c984db1c46a412 # v4.31.7
