@@ -29,11 +29,11 @@ jobs:
 
       # Initialize CodeQL with Ruby language analysis
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@cf1bb45a277cb3c205638b2cd5c984db1c46a412 # v4.31.7
+        uses: github/codeql-action/init@1b168cd39490f61582a9beae412bb7057a6b2c4e # v4.31.8
         with:
           languages: ruby
           # config-file: ./.github/codeql/codeql-config.yml  # Uncomment if config file exists
 
       # Perform CodeQL analysis
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@cf1bb45a277cb3c205638b2cd5c984db1c46a412 # v4.31.7
+        uses: github/codeql-action/analyze@1b168cd39490f61582a9beae412bb7057a6b2c4e # v4.31.8
