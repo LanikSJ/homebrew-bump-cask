@@ -20,7 +20,7 @@ channels:
 2. **Email**: Send details to [security@lanik.us](mailto:security@lanik.us)
 3. **Security Discussions**: Open a discussion in our [GitHub Discussions](https://github.com/LanikSJ/homebrew-bump-cask/discussions/categories/security)
 4. **Security Issues**: Create a [Security Advisory](https://github.com/LanikSJ/homebrew-bump-cask/security/advisories/new)
-    on GitHub
+   on GitHub
 
 ### What to Include
 
