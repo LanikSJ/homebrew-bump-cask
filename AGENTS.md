@@ -1,4 +1,4 @@
-# AI Rules & Project Standards for homebrew-bump-cask
+# Agent Rules & Project Standards for homebrew-bump-cask
 
 ## Repository Overview
 
