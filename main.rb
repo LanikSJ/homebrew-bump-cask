@@ -26,7 +26,7 @@ module Homebrew
 
   def safe_system(*cmd)
     print_command(*cmd)
-    raise "Command failed with exit status #{$CHILD_STATUS.exitstatus || 1}: #{cmd.join(' ')}" unless system(*cmd)
+    raise "Command failed with exit status #{$CHILD_STATUS.exitstatus || 1}: #{cmd.join(" ")}" unless system(*cmd)
   end
 
   def brew(*args)
