@@ -24,14 +24,17 @@ module Homebrew
     puts "[command]#{cmd.join(" ").tr("\n", " ")}"
   end
 
+  def safe_system(*cmd)
+    print_command(*cmd)
+    system(*cmd) || exit($CHILD_STATUS.exitstatus || 1)
+  end
+
   def brew(*args)
-    print_command ENV["HOMEBREW_BREW_FILE"], *args
-    Utils.safe_system ENV["HOMEBREW_BREW_FILE"], *args
+    safe_system ENV["HOMEBREW_BREW_FILE"], *args
   end
 
   def git(*args)
-    print_command ENV["HOMEBREW_GIT"], *args
-    Utils.safe_system ENV["HOMEBREW_GIT"], *args
+    safe_system ENV["HOMEBREW_GIT"], *args
   end
 
   def read_brew(*args)
