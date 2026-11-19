@@ -310,9 +310,6 @@ coverage.data
 .github/ISSUE_TEMPLATE
 .github/PULL_REQUEST_TEMPLATE
 
-# CI
-.github/workflows
-
 # Local
 local/
 scratch/
@@ -320,3 +317,6 @@ temp/
 
 # GitHub Action artifacts
 *.tgz
+
+# Global .agents folder (using global .agents configuration)
+.agents/
