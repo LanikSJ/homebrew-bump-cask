@@ -179,7 +179,6 @@ This project welcomes contributions! Please see the repository guidelines for:
 This project is licensed under the MIT License - see the
 [LICENSE](LICENSE) file for details.
 
-
 ## ⚙️ Skills Automation
 
 This repository maintains agent skills via `skills-lock.json`. The GitHub Actions
